@@ -99,7 +99,7 @@ function startSignIn() {
  * @param {string} message Text to be placed in pre element.
  */
 function appendPre(message) {
-    var pre = document.getElementById('content');
+    var pre = document.getElementById('success');
     var textContent = document.createTextNode(message + '\n');
     pre.appendChild(textContent);
 }
