@@ -1,7 +1,7 @@
 // Client ID and API key from the Developer Console
 var gapi = window.gapi
-var CLIENT_ID = '106558246625911451944';
-var API_KEY = 'AIzaSyC2L1tmv-3H2yYEk5D1mFNUhF-h47g42vY';
+var CLIENT_ID = '1059668344187-aphtkmbe38ie64l3f9gobadm71oavo58.apps.googleusercontent.com';
+var API_KEY = 'AIzaSyAA3J1qo4xLTpLX_vJKQpDMMrZhUvBpudE';
 var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
 var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
 
