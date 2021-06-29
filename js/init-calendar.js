@@ -77,7 +77,12 @@ function startSignIn() {
             });
 
             request.execute(function(event) {
-                appendPre('Event created: ' + event.htmlLink);
+                if (event.code === 200) {
+                    appendPre('Event created: ' + event.htmlLink);
+                } else {
+                    console.log('Event failed with code: ' + event.code + ' ' + event.error.message);
+                    appendPre('Event failed, something went wrong.');
+                }
             });
     });
 }
