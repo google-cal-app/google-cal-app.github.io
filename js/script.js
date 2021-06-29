@@ -45,6 +45,9 @@ function generateSpamProtectionQuestion(){
 
 const [antispamQuestion, antispamAnswer] = generateSpamProtectionQuestion();
 question.setAttribute('placeholder', antispamQuestion);
+startTime.addEventListener('change',function(ev){
+    endTime.value = startTime.value;
+});
 
 form.addEventListener("submit", function(ev){
     ev.preventDefault();
