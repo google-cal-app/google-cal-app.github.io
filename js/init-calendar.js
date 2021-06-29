@@ -45,9 +45,9 @@ function startSignIn() {
     gapi.auth2.getAuthInstance().signIn()
         .then(()=>{
             var event = {
-                'summary': 'Google I/O 2015',
-                'location': '800 Howard St., San Francisco, CA 94103',
-                'description': 'A chance to hear more about Google\'s developer products.',
+                'summary': 'Google-cal-app',
+                // 'location': '800 Howard St., San Francisco, CA 94103',
+                'description': note.value,
                 'start': {
                     'dateTime': startMeeting.toISOString(),
                     'timeZone': 'Europe/Belgrade'
@@ -57,7 +57,7 @@ function startSignIn() {
                     'timeZone': 'Europe/Belgrade'
                 },
                 'recurrence': [
-                    'RRULE:FREQ=DAILY;COUNT=2'
+                    // 'RRULE:FREQ=DAILY;COUNT=2'
                 ],
                 'attendees': [
                     {'email': email.value},
@@ -67,6 +67,7 @@ function startSignIn() {
                     'useDefault': false,
                     'overrides': [
                         {'method': 'email', 'minutes': 10},
+                        {'method': 'email', 'minutes': 30},
                         {'method': 'popup', 'minutes': 10},
                         {'method': 'popup', 'minutes': 30}
                     ]

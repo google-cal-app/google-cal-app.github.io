@@ -2,6 +2,7 @@ const form = document.getElementById('google__form');
 const name = form.querySelector("input[name='name']");
 const phone = form.querySelector("input[name='phone']");
 const email = form.querySelector("input[name='email']");
+const note = form.querySelector("input[name='note']");
 const honeypotsome = form.querySelector("input[name='honeypotsome']");
 const startTime = form.querySelector("input[name='startTime']");
 const endTime = form.querySelector("input[name='endTime']");
