@@ -66,7 +66,7 @@ function startSignIn() {
                 'reminders': {
                     'useDefault': false,
                     'overrides': [
-                        {'method': 'email', 'minutes': 24 * 60},
+                        {'method': 'email', 'minutes': 10},
                         {'method': 'popup', 'minutes': 10},
                         {'method': 'popup', 'minutes': 30}
                     ]

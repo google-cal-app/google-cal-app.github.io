@@ -49,11 +49,9 @@ form.addEventListener("submit", function(ev){
         const [startYear,startMonth,startDay] = startDate.value.split("-");
         const [endYear,endMonth,endDay] = endDate.value.split("-");
 
-        const startMeeting = new Date();
         startMeeting.setHours(startHour,startMinute);
         startMeeting.setFullYear(startYear,startMonth-1,startDay);
 
-        const endMeeting = new Date();
         endMeeting.setHours(endHour,endMinute);
         endMeeting.setFullYear(endYear,endMonth-1,endDay);
 
