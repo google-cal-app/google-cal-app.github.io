@@ -53,6 +53,11 @@ startDate.addEventListener('change',function(ev){
     endDate.value = startDate.value;
 });
 
+function validateEmail(email) {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
+
 form.addEventListener("submit", function(ev){
     ev.preventDefault();
     const errors = [];
@@ -64,7 +69,11 @@ form.addEventListener("submit", function(ev){
         errors.push("Phone must be in correct format +11122444")
     }
 
-    if (email.value === '' || email.value == null) errors.push('Fill in email');
+    if (email.value === '' || email.value == null) {
+        errors.push('Fill in email');
+    } else if (!validateEmail(email.value)) {
+        errors.push("Email is not in valid format test@example.com")
+    }
     if (honeypotsome != null) errors.push('This filed should be left empty, its used as spam protection.');
     if (question.value !== antispamAnswer) errors.push("Prove you're human invalid.")
     if (startTime.value === '' || startTime.value == null || endTime.value === '' || endTime.value == null ||

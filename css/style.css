@@ -228,3 +228,7 @@ form input::placeholder {
     width: 200px;
     padding: 10px 0;
 }
+
+#question {
+    padding-top: 10px;
+}
