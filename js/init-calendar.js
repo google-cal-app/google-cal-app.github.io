@@ -48,6 +48,9 @@ function startSignIn() {
                 'summary': 'Google-cal-app',
                 // 'location': '800 Howard St., San Francisco, CA 94103',
                 'description': note.value,
+                'params': {
+                    'sendNotifications': true
+                },
                 'start': {
                     'dateTime': startMeeting.toISOString(),
                     'timeZone': 'Europe/Belgrade'

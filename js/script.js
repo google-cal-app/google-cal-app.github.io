@@ -10,11 +10,13 @@ const startDate = form.querySelector("input[name='startDate']");
 const endDate = form.querySelector("input[name='endDate']");
 const errorElement = document.getElementById('error');
 const successElement = document.getElementById('success');
+const question = form.querySelector("input[name='question']");
 
 let startMeeting = new Date();
 let endMeeting = new Date();
+let qa;
 
-function setDefaultValues() {
+function setTimeDefaultValues() {
     const startDay = startMeeting.getDate() < 10 ? "0" + startMeeting.getDate() : startMeeting.getDate();
     const endDay = endMeeting.getDate() < 10 ? "0" + endMeeting.getDate() : endMeeting.getDate();
     startDate.value = startMeeting.getFullYear() + "-0" + (startMeeting.getMonth()+1) + "-" + startDay;
@@ -25,7 +27,24 @@ function setDefaultValues() {
     endTime.value = "01:00";
 
 }
-setDefaultValues();
+setTimeDefaultValues();
+
+function generateSpamProtectionQuestion(){
+    qa = {
+        "What color is the sky?": "blue",
+        "Zebra is black and": "white",
+        "Day is the opposite of": "night"
+    }
+    const values = Object.values(qa);
+    const keys = Object.keys(qa);
+    const randIndex = Math.floor(Math.random()*keys.length);
+    const quest = keys[randIndex];
+    const answer = values[randIndex];
+    return [quest,answer];
+}
+
+const [antispamQuestion, antispamAnswer] = generateSpamProtectionQuestion();
+question.setAttribute('placeholder', antispamQuestion);
 
 form.addEventListener("submit", function(ev){
     ev.preventDefault();
@@ -40,6 +59,7 @@ form.addEventListener("submit", function(ev){
 
     if (email.value === '' || email.value == null) errors.push('Fill in email');
     if (honeypotsome != null) errors.push('This filed should be left empty, its used as spam protection.');
+    if (question.value !== antispamAnswer) errors.push("Prove you're human invalid.")
     if (startTime.value === '' || startTime.value == null || endTime.value === '' || endTime.value == null ||
         startDate.value === '' || startDate.value == null || endDate.value === '' || endDate.value == null) {
         errors.push("Fill in time and date")

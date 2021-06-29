@@ -92,6 +92,7 @@ main h1 {
     display: flex;
     justify-content: center;
     margin: 70px;
+    font-weight: normal;
 }
 
 section {
@@ -210,7 +211,7 @@ form input::placeholder {
 }
 
 #honeypotsome-div {
-    visibility: hidden;
+    display: none;
 }
 
 .time__date__flex {
