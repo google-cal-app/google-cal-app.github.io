@@ -72,7 +72,7 @@ function startSignIn() {
             };
 
             var request = gapi.client.calendar.events.insert({
-                'calendarId': 'primary',
+                'calendarId': 'obspos8105m8t7m28lu2465no4@group.calendar.google.com',
                 'resource': event
             });
 
@@ -99,7 +99,7 @@ function startSignIn() {
  * @param {string} message Text to be placed in pre element.
  */
 function appendPre(message) {
-    var pre = document.getElementById('success');
+    var pre = document.getElementById('content');
     var textContent = document.createTextNode(message + '\n');
     pre.appendChild(textContent);
 }
