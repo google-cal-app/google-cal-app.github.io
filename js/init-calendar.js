@@ -45,7 +45,7 @@ function startSignIn() {
     gapi.auth2.getAuthInstance().signIn()
         .then(()=>{
             var event = {
-                'summary': 'Google-cal-app',
+                'summary': name.value + " " + phone.value,
                 // 'location': '800 Howard St., San Francisco, CA 94103',
                 'description': note.value,
                 'params': {
@@ -69,9 +69,9 @@ function startSignIn() {
                 'reminders': {
                     'useDefault': false,
                     'overrides': [
-                        {'method': 'email', 'minutes': 10},
+                        {'method': 'email', 'minutes': 15},
                         {'method': 'email', 'minutes': 30},
-                        {'method': 'popup', 'minutes': 10},
+                        {'method': 'popup', 'minutes': 15},
                         {'method': 'popup', 'minutes': 30}
                     ]
                 }
