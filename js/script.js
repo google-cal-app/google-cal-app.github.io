@@ -22,9 +22,9 @@ function setTimeDefaultValues() {
     startDate.value = startMeeting.getFullYear() + "-0" + (startMeeting.getMonth()+1) + "-" + startDay;
     endDate.value = endMeeting.getFullYear() + "-0" + (endMeeting.getMonth()+1) + "-" + endDay;
     startMeeting.setHours(0,0);
-    startTime.value = "00:00"
-    endMeeting.setHours(1,0);
-    endTime.value = "01:00";
+    startTime.value = "12:00"
+    endMeeting.setHours(0,0);
+    endTime.value = "12:00";
 
 }
 setTimeDefaultValues();
