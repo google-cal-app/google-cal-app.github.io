@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Google calendar app</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    </head>
+    <body>
+        <header></header>
+        <main>
+            <h1>Google calendar app</h1>
+
+            <section class="gform">
+                <form id="google__form" >
+                    <div>
+                        <input id="name" name="name" type="text" placeholder="Your name *">
+                    </div>
+                    <div>
+                        <input id="phone" name="phone" type="string" placeholder="Your phone *">
+                    </div>
+                    <div>
+                        <input id="email" name="email" type="email" placeholder="Email *">
+                    </div>
+                    <div>
+                        <input id="note" name="note" type="text" placeholder="Note ">
+                    </div>
+                    <div>
+                        <p id="error"></p>
+                        <p id="success">Success!</p>
+                    </div>
+                    <button onclick="handleForm()" id="authorize_button" type="submit" class="button primary">submit</button>
+                </form>
+            </section>
+        </main>
+
+
+        <script src="https://apis.google.com/js/api.js"></script>
+        <script src="js/init-calendar.js"></script>
+        <script src="js/script.js"></script>
+    </body>
+</html>
