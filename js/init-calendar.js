@@ -79,11 +79,11 @@ function startSignIn() {
             });
 
             request.execute(function(event) {
-                if (event.code === 200) {
-                    appendPre('Event created: ' + event.htmlLink);
-                } else {
+                if (event.error) {
                     console.log('Event failed with code: ' + event.code + ' ' + event.error.message);
                     appendPre('Event failed, something went wrong.');
+                } else {
+                    appendPre('Event created: ' + event.htmlLink);
                 }
             });
     });
