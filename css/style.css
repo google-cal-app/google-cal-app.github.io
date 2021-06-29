@@ -208,3 +208,22 @@ form input::placeholder {
     color: white;
     padding: 10px;
 }
+
+#honeypotsome-div {
+    visibility: hidden;
+}
+
+.time__date__flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+.flex-side {
+    flex: 1;
+}
+.flex-side label {
+    display: block;
+}
+.flex-side input {
+    width: 200px;
+    padding: 10px 0;
+}

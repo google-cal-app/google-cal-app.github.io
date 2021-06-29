@@ -11,14 +11,35 @@
             <section class="gform">
                 <form id="google__form" >
                     <div>
-                        <input id="name" name="name" type="text" placeholder="Your name *">
+                        <input id="name" name="name" type="text" placeholder="Your name *" required>
                     </div>
                     <div>
                         <input id="phone" name="phone" type="string" placeholder="Your phone *">
                     </div>
                     <div>
-                        <input id="email" name="email" type="email" placeholder="Email *">
+                        <input id="email" name="email" type="email" placeholder="Email *" required>
                     </div>
+                    <div class="time__date__flex">
+                        <div class="flex-side">
+                            <label for="startTime">Start time: </label>
+                            <input type="time" id="startTime" name="startTime" required>
+                        </div>
+                        <div class="flex-side">
+                            <label for="endTime">End time: </label>
+                            <input type="time" id="endTime" name="endTime" required>
+                        </div>
+                    </div>
+                    <div class="time__date__flex">
+                        <div class="flex-side">
+                            <label for="startTime">Start date: </label>
+                            <input type="date" id="startDate" name="startDate" required>
+                        </div>
+                        <div class="flex-side">
+                            <label for="endTime">End date: </label>
+                            <input type="date" id="endDate" name="endDate" required>
+                        </div>
+                    </div>
+
                     <div>
                         <input id="note" name="note" type="text" placeholder="Note ">
                     </div>
@@ -26,7 +47,13 @@
                         <p id="error"></p>
                         <p id="success"></p>
                     </div>
-                    <button onclick="handleForm()" id="authorize_button" type="button" class="button primary">submit</button>
+                    <div id="honeypotsome-div">
+                        If you see this, leave this form field blank
+                        and invest in CSS support.
+                        <input id="honeypotsome" type="text" name="body" value="" />
+                    </div>
+
+                    <button id="authorize_button" type="submit" class="button primary">submit</button>
                     <div>
                         <p id="content"></p>
                     </div>
@@ -37,6 +64,6 @@
 
         <script src="https://apis.google.com/js/api.js"></script>
         <script src="js/init-calendar.js"></script>
-<!--        <script src="js/script.js"></script>-->
+        <script src="js/script.js"></script>
     </body>
 </html>

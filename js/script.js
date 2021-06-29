@@ -1,32 +1,78 @@
-// document.addEventListener("DOMContentLoaded", function (ev) {
-//     const form = document.getElementById('google__form');
-//     const name = form.querySelector("input[name='name']");
-//     const phone = form.querySelector("input[name='phone']");
-//     const email = form.querySelector("input[name='email']");
-//     const note = form.querySelector("input[name='note']");
-//     const errorElement = document.getElementById('error');
-//     const successElement = document.getElementById('success');
-//
-//
-//     form.addEventListener("submit", function(ev){
-//         ev.preventDefault();
-//         const errors = [];
-//         if (name.value === '' || name.value == null) errors.push('Fill in name');
-//         if (phone.value === '' || phone.value == null) errors.push('Fill in phone');
-//         const numbers = /^\+?[0-9]+$/;
-//         if(!phone.value.trim().match(numbers)) {
-//             errors.push("Phone must be in correct format +11122444")
-//         }
-//         if (email.value === '' || email.value == null) errors.push('Fill in email');
-//
-//         if(errors.length > 0) {
-//             errorElement.innerText = errors.join(', ');
-//             errorElement.classList.add('active');
-//             if (successElement.classList.contains('active')) successElement.classList.remove('active');
-//             return;
-//         } else {
-//             successElement.classList.add('active');
-//             if (errorElement.classList.contains('active')) errorElement.classList.remove('active');
-//         }
-//     });
-// })
+const form = document.getElementById('google__form');
+const name = form.querySelector("input[name='name']");
+const phone = form.querySelector("input[name='phone']");
+const email = form.querySelector("input[name='email']");
+const honeypotsome = form.querySelector("input[name='honeypotsome']");
+const startTime = form.querySelector("input[name='startTime']");
+const endTime = form.querySelector("input[name='endTime']");
+const startDate = form.querySelector("input[name='startDate']");
+const endDate = form.querySelector("input[name='endDate']");
+const errorElement = document.getElementById('error');
+const successElement = document.getElementById('success');
+
+let startMeeting = new Date();
+let endMeeting = new Date();
+
+function setDefaultValues() {
+    const startDay = startMeeting.getDate() < 10 ? "0" + startMeeting.getDate() : startMeeting.getDate();
+    const endDay = endMeeting.getDate() < 10 ? "0" + endMeeting.getDate() : endMeeting.getDate();
+    startDate.value = startMeeting.getFullYear() + "-0" + (startMeeting.getMonth()+1) + "-" + startDay;
+    endDate.value = endMeeting.getFullYear() + "-0" + (endMeeting.getMonth()+1) + "-" + endDay;
+    startMeeting.setHours(0,0);
+    startTime.value = "00:00"
+    endMeeting.setHours(1,0);
+    endTime.value = "01:00";
+
+}
+setDefaultValues();
+
+form.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    const errors = [];
+    const numbers = /^\+?[0-9]+$/;
+    if (name.value === '' || name.value == null) errors.push('Fill in name');
+    if (phone.value === '' || phone.value == null) {
+        errors.push('Fill in phone');
+    } else if(!phone.value.trim().match(numbers)) {
+        errors.push("Phone must be in correct format +11122444")
+    }
+
+    if (email.value === '' || email.value == null) errors.push('Fill in email');
+    if (honeypotsome != null) errors.push('This filed should be left empty, its used as spam protection.');
+    if (startTime.value === '' || startTime.value == null || endTime.value === '' || endTime.value == null ||
+        startDate.value === '' || startDate.value == null || endDate.value === '' || endDate.value == null) {
+        errors.push("Fill in time and date")
+    } else {
+        const [startHour,startMinute] = startTime.value.split(':');
+        const [endHour,endMinute] = endTime.value.split(':');
+
+        const [startYear,startMonth,startDay] = startDate.value.split("-");
+        const [endYear,endMonth,endDay] = endDate.value.split("-");
+
+        const startMeeting = new Date();
+        startMeeting.setHours(startHour,startMinute);
+        startMeeting.setFullYear(startYear,startMonth-1,startDay);
+
+        const endMeeting = new Date();
+        endMeeting.setHours(endHour,endMinute);
+        endMeeting.setFullYear(endYear,endMonth-1,endDay);
+
+        if ((endMeeting.getTime() - startMeeting.getTime()) < 0) {
+            errors.push("Start meeting time is before end meeting time.")
+        } else if (((new Date()).getTime()  - startMeeting.getTime()) > 0) {
+            errors.push("Start meeting time is in the past.")
+        }
+
+    }
+
+
+    if(errors.length > 0) {
+        errorElement.innerText = errors.join(', ');
+        errorElement.classList.add('active');
+        if (successElement.classList.contains('active')) successElement.classList.remove('active');
+        return;
+    }
+    successElement.classList.add('active');
+    if (errorElement.classList.contains('active')) errorElement.classList.remove('active');
+    handleGoogleAuth();
+});

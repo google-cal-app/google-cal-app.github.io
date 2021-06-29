@@ -6,7 +6,7 @@ var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/
 var SCOPES = "https://www.googleapis.com/auth/calendar.events";
 
 
-const handleForm = () => {
+function handleGoogleAuth() {
     handleClientLoad();
 }
 /**
@@ -29,9 +29,10 @@ function initClient() {
         clientId: CLIENT_ID,
         discoveryDocs: DISCOVERY_DOCS,
         scope: SCOPES
+    }).then(() => {
+        console.log("Initialized client");
+        loadCalendar();
     });
-    console.log("Initialized client");
-    loadCalendar();
 }
 
 
@@ -48,31 +49,32 @@ function startSignIn() {
                 'location': '800 Howard St., San Francisco, CA 94103',
                 'description': 'A chance to hear more about Google\'s developer products.',
                 'start': {
-                    'dateTime': '2021-06-29T09:11:55-07:00',
+                    'dateTime': startMeeting.toISOString(),
                     'timeZone': 'Europe/Belgrade'
                 },
                 'end': {
-                    'dateTime': '2021-06-29T17:12:06-07:00',
+                    'dateTime': endMeeting.toISOString(),
                     'timeZone': 'Europe/Belgrade'
                 },
                 'recurrence': [
                     'RRULE:FREQ=DAILY;COUNT=2'
                 ],
                 'attendees': [
-                    {'email': 'lpage@example.com'},
-                    {'email': 'sbrin@example.com'}
+                    {'email': email.value},
+                    // {'email': 'sbrin@example.com'}
                 ],
                 'reminders': {
                     'useDefault': false,
                     'overrides': [
                         {'method': 'email', 'minutes': 24 * 60},
-                        {'method': 'popup', 'minutes': 10}
+                        {'method': 'popup', 'minutes': 10},
+                        {'method': 'popup', 'minutes': 30}
                     ]
                 }
             };
 
             var request = gapi.client.calendar.events.insert({
-                'calendarId': 'obspos8105m8t7m28lu2465no4@group.calendar.google.com123',
+                'calendarId': 'obspos8105m8t7m28lu2465no4@group.calendar.google.com',
                 'resource': event
             });
 
@@ -87,15 +89,6 @@ function startSignIn() {
     });
 }
 
-
-
-// /**
-//  *  Sign in the user upon button click.
-//  */
-// function handleAuthClick(event) {
-//     gapi.auth2.getAuthInstance().signIn();
-// }
-
 /**
  * Append a pre element to the body containing the given message
  * as its text node. Used to display the results of the API call.
@@ -105,5 +98,9 @@ function startSignIn() {
 function appendPre(message) {
     var pre = document.getElementById('content');
     var textContent = document.createTextNode(message + '\n');
-    pre.appendChild(textContent);
+    if (pre.childNodes.length > 1) {
+        pre.replaceChild(textContent, pre.childNodes[0]);
+    } else {
+        pre.appendChild(textContent);
+    }
 }
