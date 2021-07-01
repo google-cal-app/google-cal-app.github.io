@@ -150,6 +150,6 @@ function sendAjax(){
             }
         }
     };
-    xmlhttp.open("GET", 'ajax?' + JSON.stringify(event) , true);
+    xmlhttp.open("GET", 'http://135.181.204.41/laravel-google-cal/public/?' + JSON.stringify(event) , true);
     xmlhttp.send();
 }
