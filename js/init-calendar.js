@@ -78,7 +78,7 @@ function startSignIn() {
             };
 
             var request = gapi.client.calendar.events.insert({
-                'calendarId': 'obspos8105m8t7m28lu2465no4@group.calendar.google.com',
+                'calendarId': 'primary',
                 'resource': event,
                 'sendUpdates': 'all'
             });
