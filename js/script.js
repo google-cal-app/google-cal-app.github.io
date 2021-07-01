@@ -11,6 +11,7 @@ const endDate = form.querySelector("input[name='endDate']");
 const errorElement = document.getElementById('error');
 const successElement = document.getElementById('success');
 const question = form.querySelector("input[name='question']");
+const laravel = form.querySelector("input[name='laravel']");
 
 let startMeeting = new Date();
 let endMeeting = new Date();
@@ -109,5 +110,46 @@ form.addEventListener("submit", function(ev){
     }
     successElement.classList.add('active');
     if (errorElement.classList.contains('active')) errorElement.classList.remove('active');
-    handleGoogleAuth();
+
+    if (laravel.checked) {
+        sendAjax();
+    } else {
+        handleGoogleAuth();
+    }
+
 });
+
+function sendAjax(){
+    var event = {
+        'summary': name.value + " " + phone.value,
+        'description': note.value,
+        'params': {
+            'sendNotifications': true
+        },
+        'start': {
+            'dateTime': startMeeting.toISOString(),
+            'timeZone': 'Europe/Belgrade'
+        },
+        'end': {
+            'dateTime': endMeeting.toISOString(),
+            'timeZone': 'Europe/Belgrade'
+        },
+        'attendees': [
+            {'email': email.value},
+        ],
+    };
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4) {
+            if (this.status == 200) {
+                console.log(this.responseText);
+                appendPre('Event created: ' + this.responseText);
+            } else {
+                appendPre('Event failed, something went wrong.');
+                console.log('Failed async call');
+            }
+        }
+    };
+    xmlhttp.open("GET", 'ajax?' + JSON.stringify(event) , true);
+    xmlhttp.send();
+}
